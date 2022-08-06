@@ -1,0 +1,59 @@
+package basic;
+import java.io.*;
+import java.util.Scanner;
+public class pharmacy {
+
+	int Item_Code[]= {1,2,3,4,5,6};
+	String item_name[]={"Streptokinase","Paracetamol","L-Myth","Calci capsules","Filgrastim","Lenalidomide"};
+    int Item_unit_price[]={1500,10,100,25,300,422};
+    char category[]={'A','B','C','C','B','A'};
+    
+    int p; //p is the code 
+    int q; //q is the quantity
+       
+    public double Gross_amount(int p,int q)//gross amount calculation
+    {
+        double Gross_amount=Item_unit_price[p]*q;
+        if(Gross_amount>500)
+        Gross_amount=Gross_amount*0.90;
+        return Gross_amount;
+       
+    }
+
+	/*
+	 * public double discount() { double discount = (Gross_amount/0.90) -
+	 * Gross_amount; }
+	 */
+    public double taxcal(int p, double amt)//tax calculation
+    {
+        double tax=0;
+        if(category[p]=='A')
+        tax=amt*0.05;
+        if(category[p]=='B')
+        tax=amt*0.12;
+        if(category[p]=='C')
+        tax=amt*0.15; 
+        
+        return tax;
+    }
+    public static void main(String args[])throws IOException
+    {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter item code : ");
+    	int p = scan.nextInt();
+    	System.out.println("Enter item qty : ");
+    	int q = scan.nextInt();
+   	
+    pharmacy obj=new pharmacy();//object creation to call the above methods 
+    double g=obj.Gross_amount(p,q);
+    double t=obj.taxcal(p,g);
+    double final_output=g+t;
+    //double d=obj.discount();
+    
+    System.out.println("Gross Amount : "+ g);
+    System.out.println("Tax : "+ t);
+    //System.out.println("Discount : "+ d);
+	System.out.println("the final output is : "+ final_output);
+	    
+}
+}
